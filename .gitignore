@@ -130,11 +130,13 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.vosk-model
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+vosk-model/
 
 # Spyder project settings
 .spyderproject
