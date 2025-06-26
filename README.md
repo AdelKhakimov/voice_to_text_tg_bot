@@ -40,7 +40,7 @@ pip install -r requirements.txt
 ## 📥 Подготовка Vosk модели
 
 - Скачайте модель Vosk для русского языка, например:
-👉 [vosk-model-small-ru-0.22](https://alphacephei.com/vosk/models))
+👉 [vosk-model-small-ru-0.22](https://alphacephei.com/vosk/models)
 
 - Распакуйте архив в папку проекта с именем vosk-model.
 
