@@ -1,23 +1,29 @@
-import os
 import json
+import os
 import wave
-from vosk import Model, KaldiRecognizer
-from pydub import AudioSegment
-from telegram import Update
-from telegram.ext import Application, MessageHandler, CommandHandler, ContextTypes, filters
+
 from dotenv import load_dotenv
 from deepmultilingualpunctuation import PunctuationModel
+from pydub import AudioSegment
+from telegram import Update
+from telegram.ext import (Application, CommandHandler,
+                          ContextTypes, MessageHandler,
+                          filters)
+from vosk import KaldiRecognizer, Model
+
 
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
-MODEL_PATH = 'vosk-model'  # Папка с моделью Vosk (например vosk-model-small-ru-0.22)
+MODEL_PATH = 'vosk-model'
 
 punct_model = PunctuationModel()
 
+
 def recognize_voice_vosk(audio_file_path):
     if not os.path.exists(MODEL_PATH):
-        return '❗ Модель Vosk не найдена. Убедись, что папка с моделью находится рядом с этим файлом.'
+        return '❗ Модель Vosk не найдена. ' \
+               'Убедись, что папка с моделью находится рядом с этим файлом.'
 
     model = Model(MODEL_PATH)
     rec = KaldiRecognizer(model, 16000)
@@ -45,6 +51,7 @@ def recognize_voice_vosk(audio_file_path):
 
     return text_with_punct
 
+
 async def handle_voice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     file = await update.message.voice.get_file()
     ogg_path = 'voice.ogg'
@@ -65,7 +72,9 @@ async def handle_voice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     os.remove(wav_path)
 
 
-async def handle_video_note(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def handle_video_note(update: Update,
+                            context: ContextTypes.DEFAULT_TYPE
+                            ):
     file = await update.message.video_note.get_file()
     ogg_path = 'video_note.ogg'
     wav_path = 'video_note.wav'
@@ -86,7 +95,9 @@ async def handle_video_note(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('👋 Привет! Отправь голосовое сообщение, и я его расшифрую.')
+    await update.message.reply_text('👋 Привет! Отправь голосовое сообщение, '
+                                    'и я его расшифрую.')
+
 
 def main():
     app = Application.builder().token(TOKEN).build()
@@ -95,9 +106,9 @@ def main():
     app.add_handler(MessageHandler(filters.VOICE, handle_voice))
     app.add_handler(MessageHandler(filters.VIDEO_NOTE, handle_video_note))
 
-
     print('🤖 Бот запущен. Ждём голосовые сообщения...')
     app.run_polling()
+
 
 if __name__ == '__main__':
     main()
