@@ -70,7 +70,7 @@ python voice_bot.py
 ```bash
 voice_to_text_tg_bot/
 ├── vosk-model/            # Папка с моделью Vosk
-├── buttins.py             # Логика кнопок (если используется)
+├── buttons.py             # Логика кнопок (если используется)
 ├── constants.py           # Константы проекта
 ├── handle.py              # Обработчики сообщений
 ├── recognize.py           # Логика распознавания речи
@@ -86,7 +86,7 @@ voice_to_text_tg_bot/
 | Библиотека                                                                                     | Назначение                                            |
 | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
 | **[Vosk](https://alphacephei.com/vosk/)**                                                      | Офлайн-распознавание речи с поддержкой русского языка |
-| **[deep-multilingual-punctuation](https://github.com/NotebookLM/DeepMultilingualPunctuation)** | Добавление пунктуации к распознанному тексту          |
+| **[deep-multilingual-punctuation](https://github.com/oliverguhr/deepmultilingualpunctuation)** | Добавление пунктуации к распознанному тексту          |
 | **[python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)**          | Работа с Telegram Bot API                             |
 | **[pydub](https://github.com/jiaaro/pydub)**                                                   | Обработка и конвертация аудиофайлов                   |
 | **[python-dotenv](https://pypi.org/project/python-dotenv/)**                                   | Загрузка переменных окружения из `.env` файла         |
